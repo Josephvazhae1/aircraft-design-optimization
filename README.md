@@ -52,7 +52,8 @@ Compute the aircraft's initial and final weight using a mass model.
 
 Use the Breguet range equation to calculate the fitness = estimated flight range.
 
-![image](https://github.com/user-attachments/assets/0f50d265-ede0-4707-8d93-4bfd04d92c0e)
+![image](https://github.com/user-attachments/assets/a24a3340-d611-4625-b11e-737909188c16)
+
 
 3. Select the Fittest
 Sort the population by fitness (longer range).
