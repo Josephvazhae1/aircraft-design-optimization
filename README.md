@@ -55,18 +55,15 @@ Use the Breguet range equation to calculate the fitness = estimated flight range
 ![image](https://github.com/user-attachments/assets/a24a3340-d611-4625-b11e-737909188c16)
 
 
-3. Select the Fittest
-Sort the population by fitness (longer range).
+3. Select the Fittest: Sort the population by fitness (longer range).
 
 Select the top performers to act as parents for the next generation.
 
-4. Crossover (Mating)
-Randomly pair parents to produce children.
+4. Crossover (Mating): Randomly pair parents to produce children.
 Each child inherits a mix of traits (genes) from the parents.
 
 
-5. Mutation
-Slightly modify each child’s genes to maintain genetic diversity.
+5. Mutation: Slightly modify each child’s genes to maintain genetic diversity.
 
 
 6. Create New Generation
