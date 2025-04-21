@@ -24,7 +24,8 @@ This project implements three different algorithms to optimize intial aircraft d
 - Chaudhry, Imran Ali. "Preliminary Aircraft Design Optimization Using Genetic Algorithms." Marsland Press, https://www.sciencepub.net/researcher/rsj130721/10_20117rsj130721_49_60.pdf
 - Raymer, Daniel. "Aircraft Design: A Conceptual Approach." American Institute of Aeronautics and Astronautics, https://www.airloads.net/Downloads/Textbooks/Aircraft%20Design-A%20Conceptual%20Approach.pdf 
 
-## Background of Algorithm
+## Genetic Algorithms
+### Background of Algorithm
 
 Genetic Algorithms (GAs) are a class of metaheuristic, population-based optimization algorithms inspired by the principles of natural selection and evolutionary biology. Initially popularized by John Holland in the 1970s, and later expanded upon by researchers such as David E. Goldberg, GAs simulate the process of evolution by iteratively selecting, recombining, and mutating candidate solutions to evolve toward an optimal or near-optimal result.
 
@@ -36,7 +37,7 @@ However, genetic algorithms are not without their limitations. Their performance
 
 Despite these challenges, GAs remain a widely used and powerful optimization technique, particularly when the search landscape is rugged or poorly understood. Their ability to maintain a diverse population of solutions and explore multiple regions of the search space in parallel makes them a robust choice for many real-world optimization problems.
 
-## How the Algorithm Works
+### How the Algorithm Works
 
 1. Initialize Population
 Randomly generate a set of candidate aircraft designs (individuals).
@@ -88,4 +89,6 @@ Track or visualize:
  - Range improvements over time.
 
  - Final optimal aircraft geometry and performance.
-The following 
+The following
+## A* Algorithm
+## Gradient Descent ALgorithm
