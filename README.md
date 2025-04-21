@@ -17,6 +17,7 @@ This project implements three different algorithms to optimize intial aircraft d
 ## Libraries Used
 - NumPy: For numerical operations
 - Matplotlib: For visualization of each iteration of the genetic algorithm
+- Random: For initial individual generation
 
 ## Resources Used
 - Holland, John H. “Genetic Algorithms.” Scientific American, vol. 267, no. 1, 1992, pp. 66–73. JSTOR, http://www.jstor.org/stable/24939139. Accessed 21 Apr. 2025.
@@ -27,9 +28,9 @@ This project implements three different algorithms to optimize intial aircraft d
 ## Genetic Algorithms
 ### Background of Algorithm
 
-Genetic Algorithms (GAs) are a class of metaheuristic, population-based optimization algorithms inspired by the principles of natural selection and evolutionary biology. Initially popularized by John Holland in the 1970s, and later expanded upon by researchers such as David E. Goldberg, GAs simulate the process of evolution by iteratively selecting, recombining, and mutating candidate solutions to evolve toward an optimal or near-optimal result.
+Genetic Algorithms (GAs) are a class of metaheuristic, population-based optimization algorithms inspired by the principles of natural selection and evolutionary biology. Initially popularized by John Holland in the 1970s, GAs simulate the process of evolution by iteratively selecting, recombining, and mutating candidate solutions to evolve toward an optimal or near-optimal result.
 
-Unlike gradient-based optimization techniques, GAs are not limited by differentiability or continuity of the objective function. This makes them especially useful for solving complex, high-dimensional, multi-modal, and non-convex problems where analytical gradients are difficult or impossible to compute. GAs are also highly flexible and can be adapted to a wide range of applications, including combinatorial optimization, machine learning hyperparameter tuning, scheduling, and circuit design.
+Unlike gradient-based optimization techniques, GAs are not limited by differentiability or continuity of the objective function. This makes them especially useful for solving complex, high-dimensional, and non-convex problems where analytical gradients are difficult or impossible to compute. GAs are also highly flexible and can be adapted to a wide range of applications, including combinatorial optimization, machine learning hyperparameter tuning, scheduling, and circuit design.
 
 A typical genetic algorithm begins with a randomly initialized population of chromosomes—encoded representations of possible solutions. Each individual is evaluated using a fitness function, and those with higher fitness are more likely to be selected for reproduction. New offspring are generated through crossover (recombination) of parent chromosomes and mutation, introducing variation into the population and helping avoid premature convergence. Over successive generations, the population evolves to exhibit increasingly fit individuals.
 
@@ -44,28 +45,21 @@ Randomly generate a set of candidate aircraft designs (individuals).
 
 Each individual has severa; genes: Aspect Ratio (AR), Wing Area (S), L/D ratio, Fuel Mass, etc.
 
-Function: generate_individual() - Randomly creates 20 individuals, each with genes:
-  - AR (Aspect Ratio)
-  - S (Wing Area)
-  - LD (Lift-to-Drag Ratio)
-  - fuel_mass
-  - (Fixed payload mass, cruise speed V, and specific fuel consumption c)
-
 2. Evaluate Fitness
 For each individual:
 Compute the aircraft's initial and final weight using a mass model.
 ![image](https://github.com/user-attachments/assets/73085ff2-a3df-40e0-a2b8-cc4a8293bab7)
 
 Use the Breguet range equation to calculate the fitness = estimated flight range.
+![image](https://github.com/user-attachments/assets/0f50d265-ede0-4707-8d93-4bfd04d92c0e)
 
 3. Select the Fittest
-Sort the population by fitness (longer range = better).
+Sort the population by fitness (longer range).
 
-Select the top performers (e.g., top 10%) to act as parents for the next generation.
+Select the top performers to act as parents for the next generation.
 
 4. Crossover (Mating)
 Randomly pair parents to produce children.
-
 Each child inherits a mix of traits (genes) from the parents.
 
 
@@ -89,6 +83,11 @@ Track or visualize:
  - Range improvements over time.
 
  - Final optimal aircraft geometry and performance.
-The following
+   
+The following graph visualizes the performance of our genetic algorithm: 
+![image](https://github.com/user-attachments/assets/297426de-a4d4-4dcf-9947-7b64caa90d9c)
+
+
+
 ## A* Algorithm
 ## Gradient Descent ALgorithm
