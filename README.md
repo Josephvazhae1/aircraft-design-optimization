@@ -103,4 +103,4 @@ More importantly, defining a good heuristic in this context is difficult. In typ
 
 So while A* is useful for pathfinding and decision-making in well-structured environments, it's not ideal for tasks like tuning continuous parameters to maximize an objective function.
  
-## Gradient Descent ALgorithm
+## Gradient Descent Algorithm
