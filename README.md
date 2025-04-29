@@ -89,4 +89,18 @@ The following graph visualizes the performance of our genetic algorithm:
 
 
 ## A* Algorithm
-## Gradient Descent ALgorithm
+### Background of Algorithm
+
+A* is a well-known pathfinding and graph traversal algorithm. [Include history].
+
+At a high level, A* works by exploring paths in a graph using a cost function: f(n) = g(n) + h(n). Here, g(n) is the cost from the starting point to the current node n, while h(n) is a heuristic estimate of the remaining cost from n to the goal. By balancing these two, A* is able to prioritize nodes that are both promising and efficient to reach and is guaranteed to find the best (i.e. shortest) path.
+
+Where A* really shines is in discrete spaces, like a grid map or a network of nodes, where the cost of moving from one node to another is clear and the heuristic function can guide the search toward the goal. Some common heuristics include things like Euclidean or Manhattan distance.
+
+However, A* has its limitations. One major drawback is its memory usage: the algorithm stores all visited nodes and keeps track of the entire open set, which can become computationally expensive for large or dense graphs. Another key limitation, especially relevant to our use case, is that A* is not well-suited for continuous optimization problems. In continuous spaces, where parameters can take on an infinite number of values, defining a meaningful and efficient graph structure for A* to navigate becomes extremely challenging. Since A* relies on discrete states and predefined neighbors, it’s just not built for smooth landscapes or open-ended parameter spaces. Algorithms like gradient descent, evolutionary strategies, or Bayesian optimization tend to work better for that kind of task.
+
+More importantly, defining a good heuristic in this context is difficult. In typical pathfinding, your heuristic might be something like the Euclidean distance to the goal. But when you’re trying to optimize an objective function, you don’t actually know what the “goal” value is. That makes it tough to estimate how “far” a candidate solution is from the best one. Without a meaningful heuristic, A* loses one of its main advantages and can start behaving more like a brute-force search.
+
+So while A* is useful for pathfinding and decision-making in well-structured environments, it's not ideal for tasks like tuning continuous parameters to maximize an objective function.
+ 
+## Gradient Descent Algorithm
