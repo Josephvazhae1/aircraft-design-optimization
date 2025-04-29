@@ -176,7 +176,7 @@ fig_folder_path = 'path/to/figures/a_star/'
 best_params_over_time = np.array(best_params_over_time)
 
 # --- Visualization: Max Range Over Iterations --- #
-plt.figure(figsize=(12, 8))
+plt.figure()
 plt.plot(iterations, best_ranges)
 plt.xlabel("Iteration")
 plt.ylabel("Max Range (m)")
@@ -187,7 +187,7 @@ plt.savefig(fig_folder_path + 'range_plot.png')
 plt.show()
 
 # --- Visualization: Parameter Values Over Iterations --- #
-plt.figure(figsize=(12, 8))
+plt.figure()
 for name in param_names:
     idx = param_names.index(name)
     plt.plot(iterations, best_params_over_time[:, idx], label=name, color=colors[name])
@@ -205,7 +205,7 @@ plt.show()
 nums = [param_to_num[p] for p in param_changes]
 scatter_colors = [colors[p] if p in colors else "gray" for p in param_changes]
 
-plt.figure(figsize=(12, 6))
+plt.figure()
 plt.scatter(iterations, nums, c=scatter_colors, marker='s')
 plt.yticks(list(param_to_num.values()), list(param_to_num.keys()))
 plt.xlabel("Iteration")
@@ -217,7 +217,7 @@ plt.savefig(fig_folder_path + 'param_changes_plot.png')
 plt.show()
 
 # --- Visualization: Combined Plot --- #
-plt.figure(figsize=(12, 8))
+plt.figure()
 ax1 = plt.gca()
 
 # Parameter value lines
