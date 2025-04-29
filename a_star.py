@@ -1,69 +1,139 @@
-from aircraft_optimization import compute_weights, compute_range
-import heapq
 import random
+import heapq
+import numpy as np
+import matplotlib.pyplot as plt
 
-def generate_initial_state():
-    return {
-        'AR': random.uniform(6, 12),
-        'S': random.uniform(15, 30),
-        'LD': random.uniform(10, 20),
-        'fuel_mass': random.uniform(500, 2000),
-        'payload_mass': 500,
-        'V': 250,
-        'c': 0.6
-    }
+# Constants
+payload_mass = 500
+V = 250
+c = 0.6
 
-def evaluate(state):
-    W_i, W_f = compute_weights(state['S'], state['AR'], state['fuel_mass'], state['payload_mass'])
-    return compute_range(state['LD'], state['V'], state['c'], W_i, W_f)
+# Bounds and steps
+bounds = {
+    "AR": (6, 12),
+    "S": (15, 30),
+    "LD": (10, 20),
+    "fuel_mass": (500, 2000)
+}
+step_sizes = {
+    "AR": 1,
+    "S": 1,
+    "LD": 1,
+    "fuel_mass": 1
+}
 
-def heuristic(state):
-    future = state.copy()
-    future['LD'] = min(future['LD'] * 1.1, 20)
-    future['fuel_mass'] = min(future['fuel_mass'] * 1.2, 2000)
-    W_i, W_f = compute_weights(future['S'], future['AR'], future['fuel_mass'], future['payload_mass'])
-    return -compute_range(future['LD'], future['V'], future['c'], W_i, W_f)
+# Objective function
+def compute_range(AR, S, LD, fuel_mass):
+    empty_mass = (20 * (S * AR)**0.6)
+    return (V / c) * LD * np.log((empty_mass + fuel_mass + payload_mass) / (empty_mass + payload_mass))
 
-def neighbors(state):
-    deltas = {
-        'AR': 0.5,
-        'S': 1.0,
-        'LD': 0.5,
-        'fuel_mass': 100
-    }
-    neighbor_states = []
-    for key, delta in deltas.items():
-        for direction in [-1, 1]:
-            new_state = state.copy()
-            new_state[key] = max(1, new_state[key] + direction * delta)
-            neighbor_states.append(new_state)
-    return neighbor_states
+def heuristic(_state):
+    return 0
 
-def a_star_search(max_iter=500):
-    start = generate_initial_state()
-    start_range = evaluate(start)
-    frontier = [( -(start_range + heuristic(start)), start )]
+def astar(max_iters=5000):
+    curr_iters = 0
+
+    start = (
+        random.uniform(bounds["AR"][0], bounds["AR"][1]),
+        random.uniform(bounds["S"][0], bounds["S"][1]),
+        random.uniform(bounds["LD"][0], bounds["LD"][1]),
+        random.uniform(bounds["fuel_mass"][0], bounds["fuel_mass"][1])
+    )
+
     visited = set()
-    best = (start_range, start)
+    heap = []
 
-    for _ in range(max_iter):
-        if not frontier:
-            break
-        _, current = heapq.heappop(frontier)
-        key = tuple(round(current[k], 2) for k in ['AR', 'S', 'LD', 'fuel_mass'])
-        if key in visited:
+    g_start = -compute_range(*start)
+    h_start = heuristic(start)
+    f_start = g_start + h_start
+    heapq.heappush(heap, (f_start, g_start, start, "Start"))  # also track the last changed parameter
+
+    best = start
+    best_score = compute_range(*start)
+
+    best_ranges = [best_score]
+    best_params_over_time = [best]
+    param_changes = ["Start"]  # Track changes (Start = initial random sample)
+
+    while heap and curr_iters < max_iters:
+        f_curr, g_curr, current, changed_param = heapq.heappop(heap)
+
+        if current in visited:
             continue
-        visited.add(key)
+        visited.add(current)
 
-        curr_range = evaluate(current)
-        if curr_range > best[0]:
-            best = (curr_range, current)
+        current_range = -f_curr
 
-        for neighbor in neighbors(current):
-            n_key = tuple(round(neighbor[k], 2) for k in ['AR', 'S', 'LD', 'fuel_mass'])
-            if n_key not in visited:
-                cost = -evaluate(neighbor) + heuristic(neighbor)
-                heapq.heappush(frontier, (cost, neighbor))
+        if current_range > best_score:
+            best_score = current_range
+            best = current
 
-    return best
+        # Record best so far
+        best_ranges.append(best_score)
+        best_params_over_time.append(best)
+        param_changes.append(changed_param)
 
+        # Expand neighbors
+        for i, key in enumerate(["AR", "S", "LD", "fuel_mass"]):
+            for delta in [-step_sizes[key], step_sizes[key]]:
+                new = list(current)
+                new[i] += delta
+
+                if all(x >= 0 for x in new):
+                    new_state = tuple(round(x, 2) for x in new)
+
+                    if new_state not in visited:
+                        g_new = -compute_range(*new_state)
+                        h_new = heuristic(new_state)
+                        f_new = g_new + h_new
+                        heapq.heappush(heap, (f_new, g_new, new_state, key))  # record what changed
+
+        curr_iters += 1
+
+    return best, best_score, best_ranges, best_params_over_time, param_changes
+
+# Run
+best_params, max_range, best_ranges, best_params_over_time, param_changes = astar()
+
+print("Best Parameters:", best_params)
+print("Max Range:", max_range)
+
+# Plotting
+iterations = list(range(len(best_ranges)))
+param_names = ["AR", "S", "LD", "fuel_mass"]
+best_params_over_time = np.array(best_params_over_time)
+
+# Max range plot
+plt.figure(figsize=(12, 8))
+plt.plot(iterations, best_ranges)
+plt.xlabel("Iteration")
+plt.ylabel("Max Range")
+plt.title("Max Range Over Iterations")
+plt.grid(True)
+plt.show()
+
+# Parameters over time
+plt.figure(figsize=(12, 8))
+for i, name in enumerate(param_names):
+    plt.plot(iterations, best_params_over_time[:, i], label=name)
+plt.xlabel("Iteration")
+plt.ylabel("Parameter Value")
+plt.yscale('log')
+plt.title("Best Parameter Values Over Iterations")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Plot what parameter was changed at each iteration
+plt.figure(figsize=(12, 6))
+
+param_to_num = {"Start": -1, "AR": 0, "S": 1, "LD": 2, "fuel_mass": 3}
+nums = [param_to_num[p] for p in param_changes]
+
+plt.scatter(iterations, nums, c=nums, cmap="Set1", marker='s')
+plt.yticks([-1, 0, 1, 2, 3], ["Start", "AR", "S", "LD", "fuel_mass"])
+plt.xlabel("Iteration")
+plt.ylabel("Changed Parameter")
+plt.title("Parameter Changed at Each Iteration")
+plt.grid(True)
+plt.show()
