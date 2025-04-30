@@ -100,7 +100,7 @@ The following graph visualizes the performance of our genetic algorithm:
 ## A* Algorithm
 ### Background of Algorithm
 
-A* is a well-known pathfinding and graph traversal algorithm. [Include history].
+A* is a well-known pathfinding and graph traversal algorithm.
 
 At a high level, A* works by exploring paths in a graph using a cost function: f(n) = g(n) + h(n). Here, g(n) is the cost from the starting point to the current node n, while h(n) is a heuristic estimate of the remaining cost from n to the goal. By balancing these two, A* is able to prioritize nodes that are both promising and efficient to reach and is guaranteed to find the best (i.e. shortest) path.
 
