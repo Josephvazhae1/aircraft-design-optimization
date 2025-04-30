@@ -165,8 +165,6 @@ The following graph visualizes the performance of our A* algorithm:
 ![image](https://github.com/user-attachments/assets/89c5191d-7b0c-430e-a86f-132aae52be81)
 
 Even though the A* algorithm started with a worse "best parameter configuration" than the genetic algorithm (based on the estimated range at iteration 0), it succeeded in finding a more optimal configuation of parameter values than the gentic algorithm in the same number of iteratiions.
- 
-## Gradient Descent Algorithm
 
 ## Gradient Descent Algorithm
 The gradient is a vector of partial derivatives that points in the direction of greatest change. By following the gradient, we can attempt to find the maxima/minima of an objective function. There are several drawbacks to this method. This algorithm gets stuck at local optima and the search is exhaustive and slow, which isn't efficient for solution spaces of higher dimensions. However, we thought this would be a good basemark to compare our genetic algorithm and A* method to. However, because the Breguet equation is a non differentiable function, since d/dx(log(x)) = 1/(xln10), we endud up with servere instability in our gradient descent.
