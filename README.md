@@ -152,5 +152,15 @@ So, we continously run the following:
 - Pop the node with the lowest f(n) from the queue.
 - If the node has not been visited, evaulate its neighbors as described above.
 - Repeat the process for a predefined number of iterations or until convergence criteria are met.
+
+#### 5. Visualize & Anaylze Results
+
+Within our A* algorithm, we tracked the folowing to help us better understand the trends and changes that our algorithm makes to our parameter values and estimated range.
+- Optimal parameter values/range estimation
+- Breguet Range over time
+- Parameter values over time
+- Parameter changed at each iteration
+
+The following graph visualizes the performance of our A* algorithm:
  
 ## Gradient Descent Algorithm
