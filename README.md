@@ -114,7 +114,8 @@ So while A* is useful for pathfinding and decision-making in well-structured env
 
 ### How the Algorithm Works
 
-1. Initialization: We first randomly generate an initial aircraft configuration within specified bounds for each parameter:
+1. Initialization
+We first randomly generate an initial aircraft configuration within specified bounds for each parameter:
 - Aspect Ratio (AR): 5 to 20
 - Wing Area (S): 10 to 80 m²
 - Lift-to-Drag Ratio (L/D): 10 to 25
@@ -122,7 +123,8 @@ So while A* is useful for pathfinding and decision-making in well-structured env
 
 This initial state serves as the starting node for the A* search algorithm. Typically, you'd also specify a goal node (or state), but in the context of our application, our "goal" is uknown since we are trying to find the optimal soultion.
 
-2. Cost Function: Like previously mentioned, the component that makes A* so powerful is it's unique cost function:
+2. Cost Function
+Like previously mentioned, the component that makes A* so powerful is it's unique cost function:
 ![image](https://github.com/user-attachments/assets/3a24c49f-a6c1-472a-a9f2-3487b880a62f)
 where:
 - f(n): the estimate of the total cost from start node to goal node through node n
@@ -139,5 +141,12 @@ For each parameter (AR, S, L/D, Fuel Mass), we generate neighboring states by in
 
 We want to evaluate the potential of each neighbor, by using the cost function previously mentioned. So, for every neighbor, we compute f(n) = g(n) + h(n) = -Breguet range(n) + 0. Then, we add each neighbor to a priority queue for further exploration.
 
+4. Search Process
+The min-heap priority queue previously mentioned helps us to select the next node with the lowest cost f(n) for exploration.
+
+So, we continously run the following:
+- Pop the node with the lowest f(n) from the queue.
+- If the node has not been visited, evaulate its neighbors as described above.
+- Repeat the process for a predefined number of iterations or until convergence criteria are met.
  
 ## Gradient Descent Algorithm
