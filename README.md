@@ -171,7 +171,7 @@ Even though the A* algorithm started with a worse "best parameter configuration"
 The following graph offers us a look into how each parameter value changed over each iteration:
 ![param_combined_plot](https://github.com/user-attachments/assets/dbf72bbd-17cc-47b0-9427-dd2d53a0b0ad)
 Given the structure of how neighbors are generted, only one parameter can be incremented or decremented by a fixed step size for each iteration. The graph shows:
-- Line vizulaizing the values of each parameter over iterations.
+- Lines vizualizing the values of each parameter over iterations.
 - Points (boxes) showing which parameter value was changed at each iteration.
 
 As we can see, the Lift-Drag-ratio increases stedily to begin the optimization, which makes sense seeing as it has a directly proportional effect on the calculated range. However, subsequent iterations focused on decreasing S and AR, effectively increasing the overall logarithmic term, leveraging the improved LD value for greater range gains. And once both S and AR achive their respective lower bound values, fuel mass is left to continue to incerase the logarithmic term, again increasing the estimated range.
