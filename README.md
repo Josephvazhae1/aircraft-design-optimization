@@ -167,3 +167,12 @@ The following graph visualizes the performance of our A* algorithm:
 Even though the A* algorithm started with a worse "best parameter configuration" than the genetic algorithm (based on the estimated range at iteration 0), it succeeded in finding a more optimal configuation of parameter values than the gentic algorithm in the same number of iteratiions.
  
 ## Gradient Descent Algorithm
+
+## Gradient Descent Algorithm
+The gradient is a vector of partial derivatives that points in the direction of greatest change. By following the gradient, we can attempt to find the maxima/minima of an objective function. There are several drawbacks to this method. This algorithm gets stuck at local optima and the search is exhaustive and slow, which isn't efficient for solution spaces of higher dimensions. However, we thought this would be a good basemark to compare our genetic algorithm and A* method to. However, because the Breguet equation is a non differentiable function, since d/dx(log(x)) = 1/(xln10), we endud up with servere instability in our gradient descent.
+![GradientInstability](https://github.com/user-attachments/assets/59cf58c3-40ab-44b9-840b-21e79de61ca4)
+
+Ultimately because of the singularity near w_f = w_i, small errors in the weight computation produce large spikes in the gradient, so to logarithmic slope becomes extremely steep which leads to unstable updates. The discontinuous derivative jumps between a penalty to a large value resulting in discontinuity, with a large gradient estimate.
+
+There are several potential resolutions for this. Initially, we could implement with a particle swarm based approach, having multiple particles generated across the solution space optimizing for gradient descent and throwing out the particles that fall into instability, but this ultimately breaks down with more discontinuities and local optima. An extremely useful case for this however, is to futher refine the solution after a heuristic to ensure that at least a local optima was reached.
+
