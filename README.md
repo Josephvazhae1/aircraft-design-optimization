@@ -124,7 +124,16 @@ This initial state serves as the starting node for the A* search algorithm. Typi
 
 2. Cost Function: Like previously mentioned, the component that makes A* so powerful is it's unique cost function:
 ![image](https://github.com/user-attachments/assets/3a24c49f-a6c1-472a-a9f2-3487b880a62f)
+where:
+- f(n): the estimate of the total cost from start node to goal node through node n
+- g(n): actual cost from start node to node n
+- h(n): estimated cost from node n to goal node
 
-   
+In the context of our application
+- g(n) = the negative output of the Breguet range equation for the node n
+![image](https://github.com/user-attachments/assets/997f8ab7-1296-4232-bb74-b9ac7e4bdde1)
+- h(n) = 0; because we have no way to estimate the distance from our current node (current parameters values) to our goal node (optimal parameters values).
+
+
  
 ## Gradient Descent Algorithm
