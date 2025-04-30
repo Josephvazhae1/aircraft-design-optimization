@@ -134,6 +134,10 @@ In the context of our application
 ![image](https://github.com/user-attachments/assets/997f8ab7-1296-4232-bb74-b9ac7e4bdde1)
 - h(n) = 0; because we have no way to estimate the distance from our current node (current parameters values) to our goal node (optimal parameters values).
 
+3. Neighbor Expansion
+For each parameter (AR, S, L/D, Fuel Mass), we generate neighboring states by incrementing and decrementing the parameter by a fixed step size (e.g., ±1), ensuring the new values remain within the defined bounds. So each node has at most 8 neighbors to consider. Each neighbor represents a potential new aircraft configuration.
+
+We want to evaluate the potential of each neighbor, by using the cost function previously mentioned. So, for every neighbor, we compute f(n) = g(n) + h(n) = -Breguet range(n) + 0. Then, we add each neighbor to a priority queue for further exploration.
 
  
 ## Gradient Descent Algorithm
