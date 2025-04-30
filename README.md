@@ -42,10 +42,14 @@ Despite these challenges, GAs remain a widely used and powerful optimization tec
 
 1. Initialize Population
 Randomly generate a set of candidate aircraft designs (individuals).
-
 Each individual has severa; genes: Aspect Ratio (AR), Wing Area (S), L/D ratio, Fuel Mass, etc.
+We performed a kind of parameter sweep to determine the optimal population size. As can be seen from the graphs below, we see a significant improvement as the population size increase from 10 to twenty, but this advantage proves almost insignificant as the population size grows to 50 or 100, only adding extra runtime with minimal benefits in the convergence.
+![pop10](https://github.com/user-attachments/assets/841abddd-f48e-419d-ba9d-1dec4f37e9e9)
+![pop20](https://github.com/user-attachments/assets/742ecb3d-b768-4190-bce3-69b38dd6eec1)
+![pop50](https://github.com/user-attachments/assets/f2e8b4fa-d87e-4532-a573-ec549c5f785b)
+![pop100](https://github.com/user-attachments/assets/01214c10-5030-43c7-bb72-c03cf0aa4c39)
 
-2. Evaluate Fitness
+3. Evaluate Fitness
 For each individual:
 Compute the aircraft's initial and final weight using a mass model.
 ![image](https://github.com/user-attachments/assets/73085ff2-a3df-40e0-a2b8-cc4a8293bab7)
@@ -58,6 +62,7 @@ Use the Breguet range equation to calculate the fitness = estimated flight range
 3. Choose the individuals to be the parents for the next generation.
 We decided to test two different parent selection strategies.
 The first parent selection strategy was roullete wheel. In roullete wheel selection, the probability of an individual being chosen as a parent is proportional to its fitness. As such, because roullete wheels ensure every individual has at least some chance of being selected, it does a good job of introducing variety into our genetic algorithm. The following shows the results of using our genetic algorithm with roullete wheel selection:
+
 ![roulette](https://github.com/user-attachments/assets/b5369349-86c3-4282-a469-5c8a9787279f)
 
 The second parent selection mechanism we tested was the tournament selection. In tournament selection, a random selection of the population was taken and the fittest individuals from that selection were chosen to serve as parents. Tournament selection allows you to control the selective pressure by varying the size of the tournament. A larger tournament means competing with more fit individuals, introducing less variance than a smaller tournament. The following graph shows the results of using our genetic algorithm with tournament selection: 
@@ -65,13 +70,11 @@ The second parent selection mechanism we tested was the tournament selection. In
 
 As you can see it converged much faster on the optimal value compared to roullete wheel selection.
 
-5. Crossover (Mating): Randomly pair parents to produce children.
-Each child inherits a mix of traits (genes) from the parents.
+5. Crossover: We implemented uniform crossover. This means that each gene is randomly inherits from one parent. For example, a childs aspect ratio can come from Parent 1, wing surface area from parent 2, lift/drag coefficient from parent 1 etc. This does a sufficient job of increasing diversity in our genetic algorithm.
 
 
-6. Mutation: Slightly modify each child’s genes to maintain genetic diversity.
-
-
+6. Mutation: Slightly modify each child’s genes to maintain genetic diversity. We ulitized a mutation rate of 100%. We also restricted the mutation to scale by 10% at most. Because each gene was represented by a double instead of a bit, it made sense to restrict the mutation to allow for a better, more consistent convergence. The goal for this mutation strategy was to maintain genetic diversity and avoid local optima.
+ 
 7. Create New Generation
 Replace the old population with:
 The elite individuals from the previous generation (e.g., best 2 designs).
@@ -80,9 +83,8 @@ The new children produced by crossover and mutation.
 8. Repeat
 Go back to Step 2 for a fixed number of generations, or until a convergence criterion is met (e.g., no improvement in best range).
 
-9. Visualize/Analyze Results
-Track or visualize:
-
+10. Visualize/Analyze Results
+Throughouts our gentic algorithm we tracked and/or visualized the following to better evaluate the performance of the genetic algorithme:
  - Evolution of the best design per generation.
 
  - Range improvements over time.
@@ -90,7 +92,6 @@ Track or visualize:
  - Final optimal aircraft geometry and performance.
    
 The following graph visualizes the performance of our genetic algorithm: 
-![image](https://github.com/user-attachments/assets/297426de-a4d4-4dcf-9947-7b64caa90d9c)
 
 
 
