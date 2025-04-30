@@ -55,26 +55,32 @@ Use the Breguet range equation to calculate the fitness = estimated flight range
 ![image](https://github.com/user-attachments/assets/a24a3340-d611-4625-b11e-737909188c16)
 
 
-3. Select the Fittest: Sort the population by fitness (longer range).
+3. Choose the individuals to be the parents for the next generation.
+We decided to test two different parent selection strategies.
+The first parent selection strategy was roullete wheel. In roullete wheel selection, the probability of an individual being chosen as a parent is proportional to its fitness. As such, because roullete wheels ensure every individual has at least some chance of being selected, it does a good job of introducing variety into our genetic algorithm. The following shows the results of using our genetic algorithm with roullete wheel selection:
+![roulette](https://github.com/user-attachments/assets/b5369349-86c3-4282-a469-5c8a9787279f)
 
-Select the top performers to act as parents for the next generation.
+The second parent selection mechanism we tested was the tournament selection. In tournament selection, a random selection of the population was taken and the fittest individuals from that selection were chosen to serve as parents. Tournament selection allows you to control the selective pressure by varying the size of the tournament. A larger tournament means competing with more fit individuals, introducing less variance than a smaller tournament. The following graph shows the results of using our genetic algorithm with tournament selection: 
+![tournament](https://github.com/user-attachments/assets/699fe5e1-167a-48da-a3fa-dfa5b0f14996)
 
-4. Crossover (Mating): Randomly pair parents to produce children.
+As you can see it converged much faster on the optimal value compared to roullete wheel selection.
+
+5. Crossover (Mating): Randomly pair parents to produce children.
 Each child inherits a mix of traits (genes) from the parents.
 
 
-5. Mutation: Slightly modify each child’s genes to maintain genetic diversity.
+6. Mutation: Slightly modify each child’s genes to maintain genetic diversity.
 
 
-6. Create New Generation
+7. Create New Generation
 Replace the old population with:
 The elite individuals from the previous generation (e.g., best 2 designs).
 The new children produced by crossover and mutation.
 
-7. Repeat
+8. Repeat
 Go back to Step 2 for a fixed number of generations, or until a convergence criterion is met (e.g., no improvement in best range).
 
-8. Visualize/Analyze Results
+9. Visualize/Analyze Results
 Track or visualize:
 
  - Evolution of the best design per generation.
