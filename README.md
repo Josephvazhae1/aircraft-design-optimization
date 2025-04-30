@@ -111,5 +111,20 @@ However, A* has its limitations. One major drawback is its memory usage: the alg
 More importantly, defining a good heuristic in this context is difficult. In typical pathfinding, your heuristic might be something like the Euclidean distance to the goal. But when you’re trying to optimize an objective function, you don’t actually know what the “goal” value is. That makes it tough to estimate how “far” a candidate solution is from the best one. Without a meaningful heuristic, A* loses one of its main advantages and can start behaving more like a brute-force search.
 
 So while A* is useful for pathfinding and decision-making in well-structured environments, it's not ideal for tasks like tuning continuous parameters to maximize an objective function.
+
+### How the Algorithm Works
+
+1. Initialization: We first randomly generate an initial aircraft configuration within specified bounds for each parameter:
+- Aspect Ratio (AR): 5 to 20
+- Wing Area (S): 10 to 80 m²
+- Lift-to-Drag Ratio (L/D): 10 to 25
+- Fuel Mass: 0 to 10,000 kg
+
+This initial state serves as the starting node for the A* search algorithm. Typically, you'd also specify a goal node (or state), but in the context of our application, our "goal" is uknown since we are trying to find the optimal soultion.
+
+2. Cost Function: Like previously mentioned, the component that makes A* so powerful is it's unique cost function:
+![image](https://github.com/user-attachments/assets/3a24c49f-a6c1-472a-a9f2-3487b880a62f)
+
+   
  
 ## Gradient Descent Algorithm
