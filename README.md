@@ -128,6 +128,7 @@ This initial state serves as the starting node for the A* search algorithm. Typi
 
 Like previously mentioned, the component that makes A* so powerful is it's unique cost function:
 ![image](https://github.com/user-attachments/assets/3a24c49f-a6c1-472a-a9f2-3487b880a62f)
+
 where:
 - f(n): the estimate of the total cost from start node to goal node through node n
 - g(n): actual cost from start node to node n
