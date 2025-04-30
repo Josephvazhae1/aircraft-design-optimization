@@ -114,7 +114,8 @@ So while A* is useful for pathfinding and decision-making in well-structured env
 
 ### How the Algorithm Works
 
-1. Initialization
+#### 1. Initialization
+
 We first randomly generate an initial aircraft configuration within specified bounds for each parameter:
 - Aspect Ratio (AR): 5 to 20
 - Wing Area (S): 10 to 80 m²
@@ -123,7 +124,8 @@ We first randomly generate an initial aircraft configuration within specified bo
 
 This initial state serves as the starting node for the A* search algorithm. Typically, you'd also specify a goal node (or state), but in the context of our application, our "goal" is uknown since we are trying to find the optimal soultion.
 
-2. Cost Function
+#### 2. Cost Function
+
 Like previously mentioned, the component that makes A* so powerful is it's unique cost function:
 ![image](https://github.com/user-attachments/assets/3a24c49f-a6c1-472a-a9f2-3487b880a62f)
 where:
@@ -136,12 +138,14 @@ In the context of our application
 ![image](https://github.com/user-attachments/assets/997f8ab7-1296-4232-bb74-b9ac7e4bdde1)
 - h(n) = 0; because we have no way to estimate the distance from our current node (current parameters values) to our goal node (optimal parameters values).
 
-3. Neighbor Expansion
+#### 3. Neighbor Expansion
+
 For each parameter (AR, S, L/D, Fuel Mass), we generate neighboring states by incrementing and decrementing the parameter by a fixed step size (e.g., ±1), ensuring the new values remain within the defined bounds. So each node has at most 8 neighbors to consider. Each neighbor represents a potential new aircraft configuration.
 
 We want to evaluate the potential of each neighbor, by using the cost function previously mentioned. So, for every neighbor, we compute f(n) = g(n) + h(n) = -Breguet range(n) + 0. Then, we add each neighbor to a priority queue for further exploration.
 
-4. Search Process
+#### 4. Search Process
+
 The min-heap priority queue previously mentioned helps us to select the next node with the lowest cost f(n) for exploration.
 
 So, we continously run the following:
