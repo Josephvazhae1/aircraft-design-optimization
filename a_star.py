@@ -10,18 +10,18 @@ c = 0.6             # Specific fuel consumption
 
 # --- Parameter Initialization Bounds --- #
 init_bounds = {
-    "AR": (6, 12),              # Aspect Ratio
-    "S": (15, 30),              # Wing Area
-    "LD": (10, 20),             # Lift-to-Drag Ratio
-    "fuel_mass": (500, 2000)    # Fuel Mass
+    "AR": (5, 20),              # Aspect Ratio
+    "S": (10, 80),              # Wing Area
+    "LD": (10, 25),             # Lift-to-Drag Ratio
+    "fuel_mass": (0, 10000)     # Fuel Mass
 }
 
 # --- Parameter Global Bounds --- #
 param_bounds = {
-    "AR": (0, np.inf),
-    "S": (0, np.inf),
-    "LD": (0, np.inf),
-    "fuel_mass": (0, np.inf)
+    "AR": (5, 20),              # Aspect Ratio
+    "S": (10, 80),              # Wing Area
+    "LD": (10, 25),             # Lift-to-Drag Ratio
+    "fuel_mass": (0, 10000)     # Fuel Mass
 }
 
 # --- Step sizes for local search around a parameter --- #
@@ -102,7 +102,7 @@ def expand_neighbors(curr_params, visited, param_bounds):
                     neighbors.append((f_new, new_state, key))
     return neighbors
 
-def astar(max_iters=3000):
+def astar(max_iters=50):
     """
     Performs A* search to optimize aircraft parameters for maximum range.
     
@@ -172,15 +172,15 @@ colors = {
     "LD": "tab:green",
     "fuel_mass": "tab:red"
 }
-fig_folder_path = 'path/to/figures/a_star/'
+fig_folder_path = 'path/to/aircraft-design-optimization/figures/a_star/params_bounded/'
 best_params_over_time = np.array(best_params_over_time)
 
 # --- Visualization: Max Range Over Iterations --- #
 plt.figure()
 plt.plot(iterations, best_ranges)
 plt.xlabel("Iteration")
-plt.ylabel("Max Range (m)")
-plt.title("A* Optimization of Breguet Range")
+plt.ylabel("Max Range (km)")
+plt.title("A* Breguet Range Optimization Over Iterations")
 plt.grid(True)
 plt.tight_layout()
 plt.savefig(fig_folder_path + 'range_plot.png')
