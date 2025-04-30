@@ -94,7 +94,7 @@ Throughouts our gentic algorithm we tracked and/or visualized the following to b
  - Final optimal aircraft geometry and performance.
    
 The following graph visualizes the performance of our genetic algorithm: 
-
+![tournament](https://github.com/user-attachments/assets/699fe5e1-167a-48da-a3fa-dfa5b0f14996)
 
 
 ## A* Algorithm
