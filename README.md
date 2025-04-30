@@ -122,7 +122,7 @@ We first randomly generate an initial aircraft configuration within specified bo
 - Lift-to-Drag Ratio (L/D): 10 to 25
 - Fuel Mass: 0 to 10,000 kg
 
-This initial state serves as the starting node for the A* search algorithm. Typically, you'd also specify a goal node (or state), but in the context of our application, our "goal" is uknown since we are trying to find the optimal soultion.
+This initial state serves as the starting node for the A* search algorithm. Typically, you'd also specify a goal node (or state), but in the context of our application, our "goal" is unknown since we are trying to find the optimal soultion.
 
 #### 2. Cost Function
 
