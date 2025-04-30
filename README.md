@@ -162,5 +162,8 @@ Within our A* algorithm, we tracked the folowing to help us better understand th
 - Parameter changed at each iteration
 
 The following graph visualizes the performance of our A* algorithm:
+![image](https://github.com/user-attachments/assets/89c5191d-7b0c-430e-a86f-132aae52be81)
+
+Even though the A* algorithm started with a worse "best parameter configuration" than the genetic algorithm (based on the estimated range at iteration 0), it succeeded in finding a more optimal configuation of parameter values than the gentic algorithm in the same number of iteratiions.
  
 ## Gradient Descent Algorithm
