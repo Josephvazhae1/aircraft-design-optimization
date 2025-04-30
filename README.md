@@ -172,11 +172,11 @@ Even though the A* algorithm started with a worse "best parameter configuration"
 The following graph offers us a look into how each parameter value changed over each iteration:
 ![param_combined_plot](https://github.com/user-attachments/assets/dbf72bbd-17cc-47b0-9427-dd2d53a0b0ad)
 
-Given the structure of how neighbors are generted, only one parameter can be incremented or decremented by a fixed step size for each iteration. The graph shows:
+Given the structure of how neighbors are generated, only one parameter can be incremented or decremented by a fixed step size for each iteration. The graph shows:
 - Lines vizualizing the values of each parameter over iterations.
 - Points (boxes) showing which parameter value was changed at each iteration.
 
-As we can see, the Lift-Drag-ratio increases stedily to begin the optimization, which makes sense seeing as it has a directly proportional effect on the calculated range. However, subsequent iterations focused on decreasing S and AR, effectively increasing the overall logarithmic term, leveraging the improved LD value for greater range gains. And once both S and AR achive their respective lower bound values, fuel mass is left to continue to incerase the logarithmic term, again increasing the estimated range.
+As we can see, the Lift-Drag-ratio increases steadily to begin the optimization, which makes sense seeing as it has a directly proportional effect on the calculated range. However, subsequent iterations focused on decreasing S and AR, effectively increasing the overall logarithmic term, leveraging the improved LD value for greater range gains. And once both S and AR achieve their respective lower bound values, fuel mass is left to continue to increase the logarithmic term, again increasing the estimated range.
 
 ## Gradient Descent Algorithm
 The gradient is a vector of partial derivatives that points in the direction of greatest change. By following the gradient, we can attempt to find the maxima/minima of an objective function. There are several drawbacks to this method. This algorithm gets stuck at local optima and the search is exhaustive and slow, which isn't efficient for solution spaces of higher dimensions. However, we thought this would be a good basemark to compare our genetic algorithm and A* method to. However, because the Breguet equation is a non differentiable function, since d/dx(log(x)) = 1/(xln10), we endud up with servere instability in our gradient descent.
