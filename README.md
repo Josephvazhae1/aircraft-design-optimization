@@ -171,6 +171,7 @@ Even though the A* algorithm started with a worse "best parameter configuration"
 
 The following graph offers us a look into how each parameter value changed over each iteration:
 ![param_combined_plot](https://github.com/user-attachments/assets/dbf72bbd-17cc-47b0-9427-dd2d53a0b0ad)
+
 Given the structure of how neighbors are generted, only one parameter can be incremented or decremented by a fixed step size for each iteration. The graph shows:
 - Lines vizualizing the values of each parameter over iterations.
 - Points (boxes) showing which parameter value was changed at each iteration.
