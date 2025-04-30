@@ -55,7 +55,8 @@ Compute the aircraft's initial and final weight using a mass model.
 ![image](https://github.com/user-attachments/assets/73085ff2-a3df-40e0-a2b8-cc4a8293bab7)
 
 Use the Breguet range equation to calculate the fitness = estimated flight range.
-![image](https://github.com/user-attachments/assets/8050e0d6-1432-48ca-94bc-7731495ba8b5)
+![image](https://github.com/user-attachments/assets/997f8ab7-1296-4232-bb74-b9ac7e4bdde1)
+
 ![image](https://github.com/user-attachments/assets/c0aedada-0a25-4dfc-af5d-9fce8338b24c)
 
 We will be optimizing the above colored parameters.
